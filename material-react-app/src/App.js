@@ -51,6 +51,7 @@ import { Helmet } from "react-helmet";
 
 export default function App() {
   const authContext = useContext(AuthContext);
+  console.log(authContext);
 
   const [controller, dispatch] = useMaterialUIController();
   const {

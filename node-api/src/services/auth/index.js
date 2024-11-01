@@ -18,8 +18,10 @@ const transporter = nodemailer.createTransport({
 });
 
 export const loginRouteHandler = async (req, res, email, password) => {
+  console.log('loginRouteHandler');
   //Check If User Exists
   let foundUser = await userModel.findOne({ email: email });
+  console.log('foundUser',foundUser);
   if (foundUser == null) {
     return res.status(400).json({
       errors: [{ detail: "Credentials don't match any existing users" }],
@@ -51,6 +53,7 @@ export const loginRouteHandler = async (req, res, email, password) => {
 
 export const registerRouteHandler = async (req, res, name, email, password) => {
   // check if user already exists
+  console.log('registerRouteHandler');
   let foundUser = await userModel.findOne({ email: email });
   if (foundUser) {
     // does not get the error
@@ -74,11 +77,13 @@ export const registerRouteHandler = async (req, res, name, email, password) => {
     password: hashPassword,
   });
   await newUser.save();
+  console.log('newUser',newUser);
 
   // Generate JWT token
   const token = jwt.sign({ id: newUser.id, email: newUser.email }, "token", {
     expiresIn: "24h",
   });
+  console.log('token',token);
   return res.status(200).json({
     token_type: "Bearer",
     expires_in: "24h",

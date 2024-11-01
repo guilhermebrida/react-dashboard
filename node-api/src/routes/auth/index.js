@@ -9,6 +9,7 @@ import {
 const router = express.Router();
 
 router.post("/login", async (req, res, next) => {
+  console.log('Postt Login');
   const { email, password } = req.body.data.attributes;
   await loginRouteHandler(req, res, email, password);
 });

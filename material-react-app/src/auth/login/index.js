@@ -28,10 +28,14 @@ import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 
 import AuthService from "services/auth-service";
 import { AuthContext } from "context";
+export default Login;
+
 
 function Login() {
-  const authContext = useContext(AuthContext);
+  console.log("Login");
 
+  const authContext = useContext(AuthContext);
+  console.log(authContext);
   const [user, setUser] = useState({});
   const [credentialsErros, setCredentialsError] = useState(null);
   const [rememberMe, setRememberMe] = useState(false);
@@ -84,6 +88,7 @@ function Login() {
     };
 
     try {
+      console.log('myData',myData);
       const response = await AuthService.login(myData);
       authContext.login(response.access_token, response.refresh_token);
     } catch (res) {
@@ -108,121 +113,119 @@ function Login() {
   };
 
   return (
-    <BasicLayoutLanding image={bgImage}>
-      <Card>
-        <MDBox
-          variant="gradient"
-          bgColor="info"
-          borderRadius="lg"
-          coloredShadow="info"
-          mx={2}
-          mt={-3}
-          p={2}
-          mb={1}
-          textAlign="center"
-        >
-          <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-            Sign in
-          </MDTypography>
-          <Grid container spacing={3} justifyContent="center" sx={{ mt: 1, mb: 2 }}>
-            <Grid item xs={2}>
-              <MDTypography component={MuiLink} href="#" variant="body1" color="white">
-                <FacebookIcon color="inherit" />
-              </MDTypography>
-            </Grid>
-            <Grid item xs={2}>
-              <MDTypography component={MuiLink} href="#" variant="body1" color="white">
-                <GitHubIcon color="inherit" />
-              </MDTypography>
-            </Grid>
-            <Grid item xs={2}>
-              <MDTypography component={MuiLink} href="#" variant="body1" color="white">
-                <GoogleIcon color="inherit" />
-              </MDTypography>
-            </Grid>
-          </Grid>
-        </MDBox>
-        <MDBox pt={4} pb={3} px={3}>
-          <MDBox component="form" role="form" method="POST" onSubmit={submitHandler}>
-            <MDBox mb={2}>
-              <MDInput
-                type="email"
-                label="Email"
-                fullWidth
-                value={inputs.email}
-                name="email"
-                onChange={changeHandler}
-                error={errors.emailError}
-              />
-            </MDBox>
-            <MDBox mb={2}>
-              <MDInput
-                type="password"
-                label="Password"
-                fullWidth
-                name="password"
-                value={inputs.password}
-                onChange={changeHandler}
-                error={errors.passwordError}
-              />
-            </MDBox>
-            <MDBox display="flex" alignItems="center" ml={-1}>
-              <Switch checked={rememberMe} onChange={handleSetRememberMe} />
-              <MDTypography
-                variant="button"
-                fontWeight="regular"
-                color="text"
-                onClick={handleSetRememberMe}
-                sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
-              >
-                &nbsp;&nbsp;Remember me
-              </MDTypography>
-            </MDBox>
-            <MDBox mt={4} mb={1}>
-              <MDButton variant="gradient" color="info" fullWidth type="submit">
-                sign in
-              </MDButton>
-            </MDBox>
-            {credentialsErros && (
-              <MDTypography variant="caption" color="error" fontWeight="light">
-                {credentialsErros}
-              </MDTypography>
-            )}
-            <MDBox mt={3} mb={1} textAlign="center">
-              <MDTypography variant="button" color="text">
-                Forgot your password? Reset it{" "}
-                <MDTypography
-                  component={Link}
-                  to="/auth/forgot-password"
-                  variant="button"
-                  color="info"
-                  fontWeight="medium"
-                  textGradient
-                >
-                  here
+      <BasicLayoutLanding image={bgImage}>
+        <Card>
+          <MDBox
+              variant="gradient"
+              bgColor="info"
+              borderRadius="lg"
+              coloredShadow="info"
+              mx={2}
+              mt={-3}
+              p={2}
+              mb={1}
+              textAlign="center"
+          >
+            <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
+              Sign in
+            </MDTypography>
+            <Grid container spacing={3} justifyContent="center" sx={{ mt: 1, mb: 2 }}>
+              <Grid item xs={2}>
+                <MDTypography component={MuiLink} href="#" variant="body1" color="white">
+                  <FacebookIcon color="inherit" />
                 </MDTypography>
-              </MDTypography>
-            </MDBox>
-            <MDBox mb={1} textAlign="center">
-              <MDTypography variant="button" color="text">
-                Don&apos;t have an account?{" "}
-                <MDTypography
-                  component={Link}
-                  to="/auth/register"
-                  variant="button"
-                  color="info"
-                  fontWeight="medium"
-                  textGradient
-                >
-                  Sign up
+              </Grid>
+              <Grid item xs={2}>
+                <MDTypography component={MuiLink} href="#" variant="body1" color="white">
+                  <GitHubIcon color="inherit" />
                 </MDTypography>
-              </MDTypography>
+              </Grid>
+              <Grid item xs={2}>
+                <MDTypography component={MuiLink} href="#" variant="body1" color="white">
+                  <GoogleIcon color="inherit" />
+                </MDTypography>
+              </Grid>
+            </Grid>
+          </MDBox>
+          <MDBox pt={4} pb={3} px={3}>
+            <MDBox component="form" role="form" method="POST" onSubmit={submitHandler}>
+              <MDBox mb={2}>
+                <MDInput
+                    type="email"
+                    label="Email"
+                    fullWidth
+                    value={inputs.email}
+                    name="email"
+                    onChange={changeHandler}
+                    error={errors.emailError}
+                />
+              </MDBox>
+              <MDBox mb={2}>
+                <MDInput
+                    type="password"
+                    label="Password"
+                    fullWidth
+                    name="password"
+                    value={inputs.password}
+                    onChange={changeHandler}
+                    error={errors.passwordError}
+                />
+              </MDBox>
+              <MDBox display="flex" alignItems="center" ml={-1}>
+                <Switch checked={rememberMe} onChange={handleSetRememberMe} />
+                <MDTypography
+                    variant="button"
+                    fontWeight="regular"
+                    color="text"
+                    onClick={handleSetRememberMe}
+                    sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
+                >
+                  &nbsp;&nbsp;Remember me
+                </MDTypography>
+              </MDBox>
+              <MDBox mt={4} mb={1}>
+                <MDButton variant="gradient" color="info" fullWidth type="submit">
+                  sign in
+                </MDButton>
+              </MDBox>
+              {credentialsErros && (
+                  <MDTypography variant="caption" color="error" fontWeight="light">
+                    {credentialsErros}
+                  </MDTypography>
+              )}
+              <MDBox mt={3} mb={1} textAlign="center">
+                <MDTypography variant="button" color="text">
+                  Forgot your password? Reset it{" "}
+                  <MDTypography
+                      component={Link}
+                      to="/auth/forgot-password"
+                      variant="button"
+                      color="info"
+                      fontWeight="medium"
+                      textGradient
+                  >
+                    here
+                  </MDTypography>
+                </MDTypography>
+              </MDBox>
+              <MDBox mb={1} textAlign="center">
+                <MDTypography variant="button" color="text">
+                  Don&apos;t have an account?{" "}
+                  <MDTypography
+                      component={Link}
+                      to="/auth/register"
+                      variant="button"
+                      color="info"
+                      fontWeight="medium"
+                      textGradient
+                  >
+                    Sign up
+                  </MDTypography>
+                </MDTypography>
+              </MDBox>
             </MDBox>
           </MDBox>
-        </MDBox>
-      </Card>
-    </BasicLayoutLanding>
+        </Card>
+      </BasicLayoutLanding>
   );
 }
-
-export default Login;

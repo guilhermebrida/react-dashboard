@@ -44,6 +44,7 @@ const AuthContextProvider = ({ children }) => {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
+    console.log(token);
     if (!token) return;
 
     setIsAuthenticated(true);
